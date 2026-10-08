@@ -3,21 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>I Love Meat · Pianezza — Menu Degustazione di Carne 45€</title>
-<meta name="description" content="Per veri carnivori: Menu Degustazione dall'antipasto al dolce, calice di vino, acqua e caffè inclusi. 45€ a persona. Prenota il tuo tavolo da I Love Meat, Pianezza (TO).">
+<title>I Love Meat · Pianezza — Menù completo ai funghi porcini 30€</title>
+<meta name="description" content="Solo a ottobre, la domenica a pranzo: menù completo ai funghi porcini dalla battuta di manzo al bunet. 30€ invece di 45€. Prenota il tuo tavolo da I Love Meat, Pianezza (TO).">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
-/* I Love Meat — landing "Per veri carnivori". Nero + rosso, display Anton. */
+/* I Love Meat — landing "Menù ai funghi porcini". Nero + oro, display Anton.
+   Le variabili --red* sono rimaste con il nome della landing originale ma
+   contengono l'oro: così basta cambiare la palette qui. */
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
   --bg:#0a0908;--bg2:#141010;--card:#1a1512;--card2:#211a16;--line:#2c2420;
   --text:#f2ede6;--muted:#9a9088;
-  --red:#d10a1c;--red-2:#f01f30;--red-d:#8f0713;
+  --red:#e0a82e;--red-2:#f0bc45;--red-d:#8a6410;
   --gold:#ffc233;
+  /* i pulsanti restano nel rosso I Love Meat */
+  --cta:#d10a1c;--cta-2:#f01f30;
   --radius:16px
 }
 html{scroll-behavior:smooth}
@@ -28,13 +32,13 @@ a{color:inherit}
 .display{font-family:"Anton","Arial Narrow",sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em;line-height:.94}
 .kicker{color:var(--red);font-size:13px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}
 .accent{color:var(--red)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:17px 32px;border:none;border-radius:999px;background:var(--red);color:#fff;font-family:"Anton","Arial Narrow",sans-serif;font-size:22px;font-weight:400;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;text-decoration:none;transition:.15s;box-shadow:0 10px 30px rgba(209,10,28,.35)}
-.btn:hover{background:var(--red-2);transform:translateY(-1px)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:17px 32px;border:none;border-radius:999px;background:var(--cta);color:#fff;font-family:"Anton","Arial Narrow",sans-serif;font-size:22px;font-weight:400;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;text-decoration:none;transition:.15s;box-shadow:0 10px 30px rgba(209,10,28,.35)}
+.btn:hover{background:var(--cta-2);transform:translateY(-1px)}
 .btn-ghost{background:transparent;border:1px solid var(--line);box-shadow:none;color:var(--text);font-weight:700}
 .btn-ghost:hover{background:rgba(255,255,255,.04);border-color:var(--red);transform:none}
-.badge{display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border:1px solid rgba(209,10,28,.5);border-radius:999px;color:var(--red);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:rgba(209,10,28,.08)}
-.badge .dot{width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 0 0 rgba(209,10,28,.6);animation:pulse 1.8s infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(209,10,28,.5)}70%{box-shadow:0 0 0 7px rgba(209,10,28,0)}100%{box-shadow:0 0 0 0 rgba(209,10,28,0)}}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border:1px solid rgba(224,168,46,.5);border-radius:999px;color:var(--red);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:rgba(224,168,46,.08)}
+.badge .dot{width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 0 0 rgba(224,168,46,.6);animation:pulse 1.8s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(224,168,46,.5)}70%{box-shadow:0 0 0 7px rgba(224,168,46,0)}100%{box-shadow:0 0 0 0 rgba(224,168,46,0)}}
 .stars{color:var(--red);letter-spacing:2px;font-size:14px}
 
 /* ---- NAV ---- */
@@ -49,7 +53,7 @@ a{color:inherit}
 
 /* ---- HERO (testo sopra immagine scurita) ---- */
 .hero{position:relative;overflow:hidden;min-height:74vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:98px 0 60px}
-.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% 50%;filter:brightness(.55) saturate(1.05);z-index:0}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;filter:brightness(.55) saturate(1.05);z-index:0}
 .hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(10,9,8,.55),rgba(10,9,8,.3) 42%,rgba(10,9,8,.96) 96%)}
 .hero-inner{position:relative;z-index:2;max-width:1120px}
 .hero .badge{margin-bottom:18px;background:rgba(10,9,8,.55);backdrop-filter:blur(4px)}
@@ -66,7 +70,8 @@ a{color:inherit}
 /* sottotitolo con l'offerta: nome del tagliere in oro e grassetto, poi cosa c'è dentro */
 .hero .offerta-hero{margin-bottom:14px}
 /* stesso trattamento del titolo della card offerta: Anton, maiuscolo */
-.hero .nome-offerta{color:var(--gold);font-family:"Anton","Arial Narrow",sans-serif;font-weight:400;
+/* "Domenica a pranzo": su una riga sua, centrata sopra l'elenco dei piatti, in rosso */
+.hero .nome-offerta{display:block;text-align:center;margin-bottom:8px;color:var(--cta-2);font-family:"Anton","Arial Narrow",sans-serif;font-weight:400;
   text-transform:uppercase;letter-spacing:.03em;font-size:1.8em;line-height:1}
 .hero .prezzo-hero s{margin-right:10px;color:#cfc6bc;font-size:.55em;vertical-align:middle;
   text-decoration-line:line-through;text-decoration-color:var(--red);text-decoration-thickness:.1em}
@@ -118,7 +123,7 @@ a{color:inherit}
 /* ---- OFFERTA ---- */
 .section{padding:36px 0}
 .offerta-titolo{color:var(--text);font-size:clamp(26px,3.6vw,40px);margin-bottom:16px}
-.offer{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:center;background:linear-gradient(160deg,#241813,#140f0d 70%);border:2px solid rgba(209,10,28,.55);border-radius:24px;padding:44px 34px;text-align:left;overflow:hidden;box-shadow:0 0 0 1px rgba(209,10,28,.12),0 24px 60px rgba(0,0,0,.5)}
+.offer{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:center;background:linear-gradient(160deg,#241813,#140f0d 70%);border:2px solid rgba(224,168,46,.55);border-radius:24px;padding:44px 34px;text-align:left;overflow:hidden;box-shadow:0 0 0 1px rgba(224,168,46,.12),0 24px 60px rgba(0,0,0,.5)}
 .offer-testo{position:relative;z-index:1}
 .offer h2.offer-title{font-size:clamp(44px,7.4vw,96px);line-height:.9;margin-bottom:20px}
 .offer-title .pre,.offer-title .post{display:block;font-size:.3em;line-height:1.1;color:var(--muted)}
@@ -131,7 +136,7 @@ a{color:inherit}
 .offer .valida{margin-top:8px;color:var(--red);font-size:12.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
 .offer-foto{position:relative;z-index:1;border-radius:16px;overflow:hidden;border:1px solid var(--line);min-height:380px}
 .offer-foto img{width:100%;height:100%;object-fit:cover}
-.offer::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(209,10,28,.18),transparent 60%);pointer-events:none}
+.offer::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(224,168,46,.18),transparent 60%);pointer-events:none}
 .offer .badge{margin-bottom:20px}
 .offer h2{font-size:clamp(30px,5.4vw,58px);margin-bottom:16px}
 .offer h2 .l2{color:var(--gold)}
@@ -161,6 +166,8 @@ a{color:inherit}
 .tile figcaption{text-shadow:0 2px 12px rgba(0,0,0,.85)}
 /* banco: foto principale grande a sinistra, seconda in colonna stretta */
 .banco{display:grid;grid-template-columns:1.7fr 1fr;gap:14px;height:440px}
+/* foto verticale delle cassette: inquadro la cassetta in basso, quella intera e più vicina */
+.tile-cassette img{object-position:50% 100%}
 .cucina{margin-top:52px}
 .cucina h3{font-size:clamp(26px,4.4vw,44px);margin-bottom:12px}
 /* galleria a incastro: due blocchi speculari, grande a sinistra poi grande a destra */
@@ -183,6 +190,10 @@ a{color:inherit}
   .tile:nth-child(1){grid-row:1;grid-column:1 / span 2}
   .banco{grid-template-columns:1fr;grid-template-rows:250px 180px;height:auto}
   .banco .tile{grid-column:1}
+  /* su mobile la tessera era una striscia bassa che tagliava la cassetta a metà:
+     le do le proporzioni della cassetta così entra tutta */
+  .banco{grid-template-rows:250px auto}
+  .banco .tile-cassette{aspect-ratio:478/320}
   .cucina .cta-row .btn{width:100%;max-width:360px}
   /* mobile: due larghe a tutta riga che incorniciano quattro tessere piccole */
   .galleria{grid-template-columns:1fr 1fr;grid-auto-rows:132px}
@@ -261,20 +272,20 @@ src="https://www.facebook.com/tr?id=1752658912398511&ev=PageView&noscript=1"
 <!-- NAV -->
 <nav class="nav">
   <div class="logo">I Love Meat<small>Per veri carnivori</small></div>
-  <a class="btn" href="#book">Riserva il coupon</a>
+  <a class="btn" href="#book">Riserva il posto</a>
 </nav>
 
 <!-- HERO -->
 <header class="hero">
-  <img class="hero-bg" src="hero.jpg" alt="Costata di manzo marezzata da I Love Meat" onerror="this.style.display='none'">
+  <img class="hero-bg" src="hero-porcini.jpg" alt="Cesto di funghi porcini freschi tra foglie di quercia e ghiande" onerror="this.style.display='none'">
   <div class="wrap hero-inner">
-    <span class="badge"><span class="dot"></span>Solo per domenica a pranzo</span>
-    <h1 class="display">Per veri<br>carnivori<br><span class="l2">come te.</span></h1>
-    <p class="lead offerta-hero"><b class="nome-offerta">Tagliere Maxi King</b>: bruschetta con pomodorini – salsiccia – costine – capocollo – hamburger – ali di pollo – contorno a scelta</p>
-    <p class="prezzo-hero"><span class="pre">A soli</span><s>40€</s>25€</p>
-    <p class="coupon-disp">35 coupon disponibili</p>
+    <span class="badge"><span class="dot"></span>Solo per il mese di ottobre</span>
+    <h1 class="display">Menù completo<br>ai funghi<br><span class="l2">porcini.</span></h1>
+    <p class="lead offerta-hero"><b class="nome-offerta">Domenica a pranzo</b>Battuta di manzo ai funghi porcini – tagliolini freschi ai funghi porcini – scaloppina di maiale ai funghi porcini – bunet della tradizione</p>
+    <p class="prezzo-hero"><span class="pre">A soli</span><s>45€</s>30€</p>
+    <p class="coupon-disp">35 posti disponibili</p>
     <div class="cta-row">
-      <a class="btn" href="#book">Prenota un tavolo e riserva il coupon</a>
+      <a class="btn" href="#book">Prenota un tavolo e riserva il posto</a>
       <div class="rate"><span class="stars">★★★★★</span><br><b>4.9</b> · 500+ carnivori soddisfatti</div>
     </div>
   </div>
@@ -286,8 +297,8 @@ src="https://www.facebook.com/tr?id=1752658912398511&ev=PageView&noscript=1"
     <div class="book-head">
       <span class="kicker">Prenota</span>
       <h2 class="display">Prenota un tavolo e riscatta l'offerta</h2>
-      <p class="spiega">Compilando il form prenoti un tavolo a tuo nome e potrai usufruire del coupon. <b>Sarà valido solo per la data inserita.</b></p>
-      <span class="badge"><span class="dot"></span>Pochi coupon rimasti</span>
+      <p class="spiega">Compilando il form prenoti un tavolo a tuo nome e potrai usufruire dell'offerta. <b>Sarà valida solo per la data inserita.</b></p>
+      <span class="badge"><span class="dot"></span>Pochi posti rimasti</span>
     </div>
 
     <!-- Form di prenotazione Dinevo. L'id "book" resta sul contenitore: è l'ancora
@@ -295,7 +306,7 @@ src="https://www.facebook.com/tr?id=1752658912398511&ev=PageView&noscript=1"
     <div class="book-embed" id="book">
       <iframe
         id="dinevo-booking"
-        src="https://api.dinevo.it/embed/r/est_e33a5577-5dea-4ff8-af37-250f70a276a0?promotion=promo_464139b9-b9ee-4295-a2ef-cfa7be9e25ce"
+        src="https://api.dinevo.it/embed/r/est_e33a5577-5dea-4ff8-af37-250f70a276a0?promotion=promo_e5ce9a0f-71e3-4524-a82d-381997c27cad"
         title="Prenota un tavolo"
         height="900"
         style="width: 100%; border: 0; border-radius: 22px; overflow: hidden"
@@ -330,17 +341,17 @@ src="https://www.facebook.com/tr?id=1752658912398511&ev=PageView&noscript=1"
       <div class="offer-testo">
         <span class="badge"><span class="dot"></span>Pochi tavoli rimasti</span>
         <h2 class="display offer-title">
-          Tagliere <span class="l2">Maxi King</span>
+          Menù <span class="l2">ai porcini</span>
         </h2>
-        <p class="sfida display">Se riuscite a finirlo,<br><span class="l2">siete dei King.</span></p>
-        <p class="desc">Bruschetta con pomodorini – salsiccia – costine – capocollo – hamburger – ali di pollo – contorno a scelta</p>
-        <div class="price"><span class="pre">A soli</span><s>40€</s>25€</div>
-        <p class="valida">Pochi coupon rimasti</p>
-        <a class="btn" href="#book">Riserva il coupon</a>
+        <p class="sfida display">Domenica a pranzo,<br><span class="l2">solo a ottobre.</span></p>
+        <p class="desc">Battuta di manzo ai funghi porcini – tagliolini freschi ai funghi porcini – scaloppina di maiale ai funghi porcini – bunet della tradizione</p>
+        <div class="price"><span class="pre">A soli</span><s>45€</s>30€</div>
+        <p class="valida">Pochi posti rimasti</p>
+        <a class="btn" href="#book">Riserva il posto</a>
         <div class="fine">Posti limitati — di solito sold out — prenota ora</div>
       </div>
       <figure class="offer-foto">
-        <img src="banco-tagli.jpg" alt="Il banco di I Love Meat con costate, tomahawk, arrosti e spiedini" loading="lazy">
+        <img src="offerta-porcini.jpg" alt="Cassette di funghi porcini freschi" loading="lazy">
       </figure>
     </div>
   </div>
@@ -351,16 +362,16 @@ src="https://www.facebook.com/tr?id=1752658912398511&ev=PageView&noscript=1"
 <section class="section exp">
   <div class="wrap">
     <span class="kicker">L'esperienza</span>
-    <h2 class="display">Non è una cena.<br><span class="l2">È un rito.</span></h2>
-    <p class="intro">Da noi la carne si sceglie <b>al banco</b>: ci passi davanti e indichi il taglio che vuoi. Da lì va dritto sulla <b>brace a fuoco vivo</b> e arriva al tavolo quando è pronto, non un minuto prima.</p>
+    <h2 class="display">La domenica a pranzo<br><span class="l2">in famiglia</span></h2>
+    <p class="intro">Abbiamo avuto tra le mani <b>i migliori porcini della zona</b>, e abbiamo pensato di prepararvi un menù dedicato dall'antipasto al dolce.<br>Solo per ottobre potete gustare questa prelibatezza che la natura ci offre <b>una volta all'anno</b>.</p>
 
     <div class="banco">
       <figure class="tile">
-        <img src="banco-tagli.jpg" alt="Il banco di I Love Meat con costate, tomahawk, arrosti e spiedini" loading="lazy">
-        <figcaption>Scegli al banco</figcaption>
+        <img src="hero-porcini.jpg" alt="Cesto di funghi porcini freschi tra foglie di quercia e ghiande" loading="lazy">
+        <figcaption>I migliori porcini della zona</figcaption>
       </figure>
-      <figure class="tile">
-        <img src="esperienza-banco.jpg" alt="Vassoi di spiedini, involtini e salsiccia al banco di I Love Meat" loading="lazy">
+      <figure class="tile tile-cassette">
+        <img src="offerta-porcini.jpg" alt="Cassette di funghi porcini freschi" loading="lazy">
       </figure>
     </div>
 
@@ -375,7 +386,7 @@ src="https://www.facebook.com/tr?id=1752658912398511&ev=PageView&noscript=1"
         <div class="tile"><img src="cucina-agnolotti.jpg" alt="Agnolotti al sugo d'arrosto" loading="lazy"></div>
         <div class="tile"><img src="cucina-orecchiette.jpg" alt="Orecchiette al pomodoro con briciole croccanti" loading="lazy"></div>
       </div>
-      <div class="cta-row"><a class="btn" href="#book">Riserva il coupon</a></div>
+      <div class="cta-row"><a class="btn" href="#book">Riserva il posto</a></div>
     </div>
   </div>
 </section>
