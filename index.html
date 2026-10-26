@@ -4,14 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>I Love Meat · Pianezza — Menù completo ai funghi porcini 30€</title>
-<meta name="description" content="Solo a ottobre, la domenica a pranzo: menù completo ai funghi porcini dalla battuta di manzo al bunet. 30€ invece di 45€. Prenota un tavolo da I Love Meat, Pianezza (TO).">
+<meta name="description" content="Fino a fine novembre, la domenica a pranzo: menù completo ai funghi porcini dal flan con porcini al bunet. 30€ invece di 45€. Prenota un tavolo da I Love Meat, Pianezza (TO).">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
 
 <style>
-/* I Love Meat — landing "Menù ai funghi porcini". Nero + oro, display Anton.
+/* I Love Meat — landing "Menù ai funghi porcini". Nero + oro, titoli in Playfair Display
+   (serif elegante, al posto dell'Anton delle altre landing), testi e bottoni in Inter.
    Le variabili --red* sono rimaste con il nome della landing originale ma
    contengono l'oro: così basta cambiare la palette qui. */
 *{box-sizing:border-box;margin:0;padding:0}
@@ -29,10 +30,15 @@ body{background:var(--bg);color:var(--text);font-family:"Inter",-apple-system,"S
 img{max-width:100%;display:block}
 a{color:inherit}
 .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
-.display{font-family:"Anton","Arial Narrow",sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em;line-height:.94}
+.display{font-family:"Playfair Display",Georgia,"Times New Roman",serif;font-weight:600;text-transform:none;letter-spacing:-.01em;line-height:1.08}
+/* Playfair di default disegna i numeri "all'antica" (4 e 5 scendono sotto la riga):
+   per prezzi e date servono quelli allineati */
+body{font-variant-numeric:lining-nums}
+/* la parte colorata dei titoli in corsivo, come nell'hero */
+.display .l2{font-style:italic;font-weight:500}
 .kicker{color:var(--red);font-size:13px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}
 .accent{color:var(--red)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:17px 32px;border:none;border-radius:999px;background:var(--cta);color:#fff;font-family:"Anton","Arial Narrow",sans-serif;font-size:22px;font-weight:400;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;text-decoration:none;transition:.15s;box-shadow:0 10px 30px rgba(209,10,28,.35)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 26px;border:none;border-radius:999px;background:var(--cta);color:#fff;font-family:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;cursor:pointer;text-decoration:none;transition:.15s;box-shadow:0 10px 30px rgba(209,10,28,.35)}
 .btn:hover{background:var(--cta-2);transform:translateY(-1px)}
 .btn-ghost{background:transparent;border:1px solid var(--line);box-shadow:none;color:var(--text);font-weight:700}
 .btn-ghost:hover{background:rgba(255,255,255,.04);border-color:var(--red);transform:none}
@@ -45,20 +51,72 @@ a{color:inherit}
 /* fissa e trasparente: la foto dell'hero passa sotto e arriva fino in cima.
    La barra scura ricompare solo quando si scorre, per non perdere leggibilità. */
 .nav{position:fixed;top:0;left:0;right:0;z-index:80;display:flex;align-items:center;justify-content:space-between;padding:16px 22px;background:transparent;border-bottom:1px solid transparent;transition:background .25s,border-color .25s}
-.nav.scrolled{background:rgba(10,9,8,.82);backdrop-filter:blur(10px);border-bottom-color:var(--line)}
-.nav .logo{font-family:"Anton",sans-serif;text-transform:uppercase;font-size:20px;letter-spacing:.02em;line-height:1}
+/* niente backdrop-filter: sopra il video dell'hero fa sballare il disegno del video su iPhone */
+.nav.scrolled{background:rgba(10,9,8,.94);border-bottom-color:var(--line)}
+.nav .logo{font-family:"Playfair Display",Georgia,"Times New Roman",serif;text-transform:uppercase;font-size:20px;letter-spacing:.02em;line-height:1}
 .nav .logo small{display:block;color:var(--red);font-family:"Inter",sans-serif;font-size:9.5px;font-weight:800;letter-spacing:.22em;margin-top:3px}
-.nav .btn{padding:11px 22px;font-size:18px}
-@media (max-width:600px){.nav .btn{padding:10px 18px;font-size:16px}}
+.nav .btn{padding:9px 18px;font-size:12.5px}
+@media (max-width:600px){.nav .btn{padding:8px 14px;font-size:11.5px}}
 
 /* ---- HERO (testo sopra immagine scurita) ---- */
 .hero{position:relative;overflow:hidden;min-height:74vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:98px 0 60px}
 .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;filter:brightness(.55) saturate(1.05);z-index:0}
 .hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(10,9,8,.55),rgba(10,9,8,.3) 42%,rgba(10,9,8,.96) 96%)}
+/* Video di sfondo "padella porcini" (stessa impostazione collaudata della landing
+   Polletto Day). Finché non parte, o se JS è spento, resta il primo fotogramma.
+   IMPORTANTE: sul <video> niente filter né mask-image. Su iPhone con filtri o
+   maschere il fotogramma ogni tanto viene ridisegnato piccolo e spostato dentro un
+   riquadro nero. Scurimento, profondità e sfumatura li fa la velatura
+   .hero.con-video::before, che sta sopra il video. */
+.hero-video{display:none}
+.hero.con-video .hero-video{display:block}
+video.hero-video,.hero.con-video .hero-foto{filter:none;-webkit-mask-image:none;mask-image:none;
+  top:0;left:0;right:0;bottom:0;width:100%;height:100%;object-fit:cover;object-position:50% 55%}
+/* NB: non nascondere mai il <video> (opacity/visibility): iPhone non fa partire da
+   solo un video che considera invisibile. Si nasconde l'immagine sopra. */
+.hero.con-video .hero-foto{opacity:1}
+.hero.video-in-onda .hero-foto{opacity:0}
+.hero-video::-webkit-media-controls,.hero-video::-webkit-media-controls-start-playback-button{display:none!important;-webkit-appearance:none}
+/* velatura: vignetta ai bordi per dare profondità, alone scuro al centro dietro
+   le scritte, in fondo sfuma nel nero della pagina. Il video è chiaro (padella su
+   fondo bianco): lo tengo in ombra, ma la padella deve ancora leggersi. */
+.hero.con-video::before{background:
+  radial-gradient(ellipse 120% 90% at 50% 45%,rgba(10,9,8,0) 40%,rgba(10,9,8,.7) 100%),
+  radial-gradient(ellipse 70% 50% at 50% 50%,rgba(10,9,8,.45),rgba(10,9,8,0) 75%),
+  linear-gradient(180deg,rgba(10,9,8,.68) 0%,rgba(10,9,8,.5) 30%,rgba(10,9,8,.56) 70%,rgba(10,9,8,.9) 90%,#0a0908 100%)}
 .hero-inner{position:relative;z-index:2;max-width:1120px}
-.hero .badge{margin-bottom:18px;background:rgba(10,9,8,.55);backdrop-filter:blur(4px)}
+.hero .badge{margin-bottom:18px;background:rgba(10,9,8,.7)}
 .hero h1{font-size:clamp(64px,13vw,196px);text-shadow:0 4px 34px rgba(0,0,0,.65)}
 .hero h1 .l2{color:var(--red)}
+/* Hero essenziale sul modello della landing Polletto Day: titolo su due righe,
+   frase con i piatti piccola, giorno e prezzo, un solo bottone, scarsità sotto.
+   Ogni riga del titolo resta intera: il corpo segue la larghezza dello schermo. */
+.hero h1{white-space:nowrap;font-size:clamp(34px,13vw,150px)}
+.hero .descr-hero{max-width:36ch;margin:16px auto 0;text-wrap:balance;color:#f2ede6;font-size:clamp(16px,4.3vw,20px);
+  line-height:1.45;font-weight:500;text-shadow:0 2px 12px rgba(0,0,0,.85)}
+.hero .sottotitolo-hero{margin:14px auto 30px;color:#fff;font-family:"Playfair Display",Georgia,"Times New Roman",serif;
+  text-transform:uppercase;letter-spacing:.04em;line-height:1.1;font-size:clamp(20px,5.4vw,34px);
+  text-shadow:0 2px 14px rgba(0,0,0,.8)}
+.hero .sottotitolo-hero .prezzo{color:var(--gold)}
+/* titolo dell'hero in serif elegante (Playfair Display) invece dell'Anton: niente
+   maiuscolo, seconda riga in corsivo oro. Ogni riga resta intera. */
+.hero h1.titolo-elegante{font-family:"Playfair Display",Georgia,"Times New Roman",serif;font-weight:600;
+  text-transform:none;letter-spacing:-.01em;line-height:1.08;white-space:normal;text-wrap:balance;
+  max-width:14ch;margin:0 auto;font-size:clamp(38px,11vw,96px)}
+.hero h1.titolo-elegante .l2{color:var(--gold);font-style:italic;font-weight:500}
+/* due frasi distanziate: prima la descrizione, poi il menù con il prezzo */
+/* prezzo grande sotto la frase: 45€ barrato, 30€ in oro, "a persona" piccolo */
+.hero .prezzo-persona{margin:14px auto 28px;font-family:"Playfair Display",Georgia,serif;font-weight:600;
+  font-size:clamp(34px,9vw,56px);line-height:1;color:var(--gold);text-shadow:0 2px 12px rgba(0,0,0,.7)}
+.hero .prezzo-persona s{color:#cfc6bc;font-size:.55em;font-weight:500;vertical-align:middle;
+  text-decoration-color:var(--cta-2);text-decoration-thickness:.08em}
+.hero .prezzo-persona .unita{font-family:"Inter",sans-serif;font-size:15px;font-weight:600;color:#f2ede6;vertical-align:middle}
+.hero .menu-hero{max-width:36ch;margin:22px auto 28px;color:#fff;font-size:clamp(16px,4.3vw,20px);
+  line-height:1.45;font-weight:600;text-shadow:0 2px 12px rgba(0,0,0,.85)}
+.hero .menu-hero s{color:#cfc6bc;font-weight:500;text-decoration-color:var(--cta-2);text-decoration-thickness:.1em}
+.hero .menu-hero .prezzo{color:var(--gold);font-weight:800}
+.hero .scarsita-hero{margin:14px auto 0;color:var(--gold);font-family:"Inter",sans-serif;font-weight:500;
+  font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;text-shadow:0 1px 10px rgba(0,0,0,.9)}
 .hero .lead{color:#eadfd4;font-size:19px;max-width:42ch;margin:24px auto 32px;text-shadow:0 2px 16px rgba(0,0,0,.8)}
 /* Offerta nell'hero con la stessa impostazione delle altre landing I Love Meat
    (ferragosto, bombette): pillola in oro, nome del tagliere e cosa contiene,
@@ -71,14 +129,14 @@ a{color:inherit}
 .hero .offerta-hero{margin-bottom:14px}
 /* stesso trattamento del titolo della card offerta: Anton, maiuscolo */
 /* "Solo domenica a pranzo": su una riga sua, centrata sopra l'elenco dei piatti, in bianco */
-.hero .nome-offerta{display:block;text-align:center;margin-bottom:8px;color:#fff;font-family:"Anton","Arial Narrow",sans-serif;font-weight:400;
+.hero .nome-offerta{display:block;text-align:center;margin-bottom:8px;color:#fff;font-family:"Playfair Display",Georgia,"Times New Roman",serif;font-weight:400;
   text-transform:uppercase;letter-spacing:.03em;font-size:1.8em;line-height:1}
 .hero .prezzo-hero s{margin-right:10px;color:#cfc6bc;font-size:.55em;vertical-align:middle;
   text-decoration-line:line-through;text-decoration-color:var(--red);text-decoration-thickness:.1em}
-.hero .prezzo-hero{margin:8px 0 14px;color:var(--gold);font-family:"Anton","Arial Narrow",sans-serif;line-height:1;
+.hero .prezzo-hero{margin:8px 0 14px;color:var(--gold);font-family:"Playfair Display",Georgia,"Times New Roman",serif;line-height:1;
   letter-spacing:.02em;font-size:clamp(42px,7.4vw,86px);text-shadow:0 2px 12px rgba(0,0,0,.7)}
 .hero .prezzo-hero .pre{margin-right:10px;font-family:"Inter",sans-serif;font-size:17px;font-weight:600;color:#cfc6bc;vertical-align:middle}
-.hero .scarsita{font-family:"Anton","Arial Narrow",sans-serif;font-weight:400;text-transform:uppercase;
+.hero .scarsita{font-family:"Playfair Display",Georgia,"Times New Roman",serif;font-weight:400;text-transform:uppercase;
   letter-spacing:.03em;line-height:1.05;font-size:clamp(26px,5.2vw,40px);
   color:var(--gold);margin:0 auto 18px;max-width:22ch;text-shadow:0 2px 12px rgba(0,0,0,.8)}
 .hero .cta-row{display:flex;align-items:center;justify-content:center;gap:22px;flex-wrap:wrap}
@@ -88,7 +146,7 @@ a{color:inherit}
 @media (max-width:600px){
   .wrap{padding:0 20px}
   /* su mobile la barra resta scura e nel flusso, come prima */
-  .nav{position:sticky;background:rgba(10,9,8,.82);backdrop-filter:blur(10px);border-bottom-color:var(--line)}
+  .nav{position:sticky;background:#0a0908;border-bottom-color:var(--line)}
   .hero{min-height:auto;padding:34px 0 44px}
   /* su schermo stretto "cover" ritaglia troppo: accorcio la foto così inquadra
      più larga, la sfumo in basso per non lasciare uno stacco netto e la scurisco
@@ -96,9 +154,13 @@ a{color:inherit}
   .hero-bg{height:78%;filter:brightness(.48) saturate(1.05);object-position:center 42%;
     -webkit-mask-image:linear-gradient(180deg,#000 68%,transparent 100%);
     mask-image:linear-gradient(180deg,#000 68%,transparent 100%)}
+  /* col video: niente foto accorciata, il video copre tutto l'hero */
+  .hero.con-video{min-height:calc(100svh - 70px)}
+  .hero.con-video .hero-bg{height:100%}
   .hero .lead{font-size:17px}
   .hero .cta-row{flex-direction:column;gap:18px}
-  .hero .cta-row .btn{width:100%;max-width:360px;font-size:24px;padding:19px 24px}
+  /* bottone più compatto su telefono: largo quanto il testo, non tutta la riga */
+  .hero .cta-row .btn{width:auto;font-size:14px;padding:13px 26px}
   .hero .rate{text-align:center;font-size:14px}
   .section{padding:30px 0}
   .grid2{grid-template-columns:1fr}
@@ -120,41 +182,39 @@ a{color:inherit}
   .hero .lead{margin:14px auto 22px}
 }
 
-/* ---- OFFERTA ---- */
+/* ---- IL MENÙ ---- */
+/* la carta sta subito sotto l'hero: niente doppio spazio sopra */
+.hero + .section{padding-top:0}
 .section{padding:36px 0}
-.offerta-titolo{color:var(--text);font-size:clamp(26px,3.6vw,40px);margin-bottom:16px}
-.offer{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:34px;align-items:center;background:linear-gradient(160deg,#241813,#140f0d 70%);border:2px solid rgba(224,168,46,.55);border-radius:24px;padding:44px 34px;text-align:left;overflow:hidden;box-shadow:0 0 0 1px rgba(224,168,46,.12),0 24px 60px rgba(0,0,0,.5)}
-.offer-testo{position:relative;z-index:1}
-.offer h2.offer-title{font-size:clamp(44px,7.4vw,96px);line-height:.9;margin-bottom:20px}
-.offer-title .pre,.offer-title .post{display:block;font-size:.3em;line-height:1.1;color:var(--muted)}
-.offer-title .pre{margin-bottom:6px}
-.offer-title .post{margin-top:8px}
-.offer .sfida{font-size:clamp(21px,2.5vw,32px);line-height:1.04;margin:0 0 18px}
-.offer .sfida .l2{color:var(--red)}
-.offer .price s{display:inline-block;margin-right:14px;color:var(--muted);font-size:.46em;vertical-align:middle;
-  text-decoration-line:line-through;text-decoration-color:var(--red);text-decoration-thickness:.07em}
-.offer .valida{margin-top:8px;color:var(--red);font-size:12.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
-.offer-foto{position:relative;z-index:1;border-radius:16px;overflow:hidden;border:1px solid var(--line);min-height:380px}
-.offer-foto img{width:100%;height:100%;object-fit:cover}
-.offer::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(224,168,46,.18),transparent 60%);pointer-events:none}
-.offer .badge{margin-bottom:20px}
-.offer h2{font-size:clamp(30px,5.4vw,58px);margin-bottom:16px}
-.offer h2 .l2{color:var(--gold)}
-.offer p.desc{color:var(--muted);font-size:17px;max-width:46ch;margin:0 0 26px}
-.offer p.desc b{color:#fff}
-.offer .price{font-family:"Anton",sans-serif;color:var(--gold);font-size:clamp(60px,11vw,96px);line-height:.9}
-.offer .price .pre{display:inline-block;font-family:"Inter",sans-serif;color:var(--muted);font-size:17px;font-weight:600;margin-right:10px;vertical-align:middle}
-.offer .btn{margin-top:26px}
-.offer .fine{margin-top:16px;color:var(--muted);font-size:12.5px;letter-spacing:.04em;text-transform:uppercase}
-/* mobile: la card torna a colonna singola, foto sotto il testo.
-   Va dopo le regole .offer qui sopra, altrimenti verrebbe sovrascritta. */
-@media (max-width:700px){
-  .offer{grid-template-columns:1fr;gap:24px;padding:38px 20px;border-radius:20px;text-align:center}
-  .offerta-titolo{text-align:center}
-  .offer p.desc{margin:0 auto 26px}
-  .offer .price{margin-top:4px}
-  .offer-foto{min-height:230px}
-  .offer .btn{width:100%;max-width:360px}
+/* "Il menù": impaginato come una carta del ristorante, tutto centrato. Cornice oro
+   doppia, portate con l'etichetta piccola spaziata e il piatto in corsivo, poi
+   sotto un filetto e l'offerta (prezzo, bottone, scarsità). */
+.carta{position:relative;max-width:620px;margin:0 auto;text-align:center;padding:54px 30px 46px;
+  background:radial-gradient(circle at 50% 0%,rgba(224,168,46,.14),transparent 62%),linear-gradient(170deg,#1f1611,#130e0c 75%);
+  border:1px solid rgba(224,168,46,.6);border-radius:6px;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.carta::before{content:"";position:absolute;inset:10px;border:1px solid rgba(224,168,46,.28);border-radius:3px;pointer-events:none}
+.carta .occhiello{color:var(--gold);font-size:11.5px;font-weight:700;letter-spacing:.24em;text-transform:uppercase}
+.carta h2{font-size:clamp(40px,8vw,64px);margin:10px 0 6px}
+.carta h2 .l2{color:var(--gold)}
+.carta .fregio{display:flex;align-items:center;justify-content:center;gap:12px;color:var(--gold);margin:4px auto 30px;font-size:14px}
+.carta .fregio::before,.carta .fregio::after{content:"";width:56px;height:1px;background:rgba(224,168,46,.55)}
+.carta .portate{list-style:none;display:grid;gap:26px;margin:0 0 34px}
+.carta .portata small{display:block;color:var(--gold);font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;margin-bottom:6px}
+.carta .portata span{display:block;font-family:"Playfair Display",Georgia,"Times New Roman",serif;font-style:italic;
+  font-size:clamp(22px,4.6vw,28px);line-height:1.25;color:var(--text);text-wrap:balance}
+.carta .offerta-carta{border-top:1px solid rgba(224,168,46,.35);padding-top:30px}
+.carta .offerta-carta .etichetta{color:var(--muted);font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.carta .prezzo-carta{margin:10px 0 4px;font-family:"Playfair Display",Georgia,"Times New Roman",serif;font-weight:600;
+  color:var(--gold);font-size:clamp(52px,11vw,76px);line-height:1}
+.carta .prezzo-carta s{color:var(--muted);font-size:.42em;font-weight:500;margin-right:12px;vertical-align:middle;
+  text-decoration-color:var(--cta-2);text-decoration-thickness:.08em}
+.carta .persona{color:var(--text);font-size:14px;font-weight:600}
+.carta .btn{margin-top:24px}
+.carta .scarsita-carta{margin-top:14px;color:var(--gold);font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase}
+@media (max-width:600px){
+  .carta{padding:44px 20px 38px}
+  .carta::before{inset:7px}
+  .carta .occhiello{font-size:10.5px;letter-spacing:.16em}
 }
 
 /* ---- ESPERIENZA / GALLERY ---- */
@@ -162,7 +222,7 @@ a{color:inherit}
 .exp h2 .l2{color:var(--red)}
 .exp .intro{color:var(--muted);font-size:17px;max-width:58ch;margin:0 0 28px}
 .exp .intro b{color:var(--text);font-weight:600}
-.tile figcaption{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:38px 16px 15px;font-family:"Anton","Arial Narrow",sans-serif;text-transform:uppercase;letter-spacing:.03em;font-size:18px;line-height:1.1;background:linear-gradient(180deg,transparent,rgba(10,9,8,.6) 38%,rgba(10,9,8,.95))}
+.tile figcaption{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:38px 16px 15px;font-family:"Playfair Display",Georgia,"Times New Roman",serif;text-transform:none;font-style:italic;letter-spacing:0;font-size:20px;line-height:1.15;background:linear-gradient(180deg,transparent,rgba(10,9,8,.6) 38%,rgba(10,9,8,.95))}
 .tile figcaption{text-shadow:0 2px 12px rgba(0,0,0,.85)}
 /* banco: foto principale grande a sinistra, seconda in colonna stretta */
 .banco{display:grid;grid-template-columns:1.7fr 1fr;gap:14px;height:440px}
@@ -194,7 +254,7 @@ a{color:inherit}
      le do le proporzioni della cassetta così entra tutta */
   .banco{grid-template-rows:250px auto}
   .banco .tile-cassette{aspect-ratio:478/320}
-  .cucina .cta-row .btn{width:100%;max-width:360px}
+  .cucina .cta-row .btn{width:auto}
   /* mobile: due larghe a tutta riga che incorniciano quattro tessere piccole */
   .galleria{grid-template-columns:1fr 1fr;grid-auto-rows:132px}
   .galleria .tile:nth-child(n){grid-column:auto;grid-row:auto}
@@ -206,7 +266,7 @@ a{color:inherit}
 .review .quote{font-size:20px;line-height:1.5;color:var(--text);margin:12px 0}
 .review .who{color:var(--muted);font-size:14px}
 .review .stats{display:flex;gap:28px;justify-content:flex-end}
-.review .stat b{font-family:"Anton",sans-serif;color:var(--red);font-size:40px;line-height:1;display:block}
+.review .stat b{font-family:"Playfair Display",Georgia,"Times New Roman",serif;color:var(--red);font-size:40px;line-height:1;display:block}
 .review .stat span{color:var(--muted);font-size:13px}
 @media (max-width:700px){.review{grid-template-columns:1fr;gap:22px}.review .stats{justify-content:flex-start}}
 
@@ -240,7 +300,7 @@ a{color:inherit}
    "padding" ne azzererebbe i lati, incollando le scritte ai bordi */
 .foot{border-top:1px solid var(--line);padding:26px 24px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:13.5px}
 .foot > *{min-width:0}
-.foot .logo{font-family:"Anton",sans-serif;text-transform:uppercase;font-size:18px;color:var(--text);letter-spacing:.02em}
+.foot .logo{font-family:"Playfair Display",Georgia,"Times New Roman",serif;text-transform:uppercase;font-size:18px;color:var(--text);letter-spacing:.02em}
 .foot a{color:var(--muted);text-decoration:none}
 .foot a:hover{color:var(--red)}
 @media (max-width:600px){
@@ -284,19 +344,45 @@ src="https://www.facebook.com/tr?id=1752658912398511&ev=PageView&noscript=1"
 
 <!-- HERO -->
 <header class="hero">
-  <img class="hero-bg" src="hero-porcini.jpg" alt="Cesto di funghi porcini freschi tra foglie di quercia e ghiande" onerror="this.style.display='none'">
+  <!-- video di sfondo: la sorgente la mette lo script in fondo (scarica il file intero prima di partire) -->
+  <video class="hero-bg hero-video" muted playsinline webkit-playsinline loop autoplay preload="none" disablepictureinpicture aria-hidden="true"></video>
+  <!-- primo fotogramma come immagine SOPRA il video: lo copre finché non gira davvero -->
+  <img class="hero-bg hero-foto" src="hero-porcini-padella-lento.jpg" alt="Funghi porcini saltati in padella" onerror="this.style.display='none'">
   <div class="wrap hero-inner">
-    <span class="badge"><span class="dot"></span>Solo per il mese di ottobre</span>
-    <h1 class="display">Menù completo<br>ai funghi<br><span class="l2">porcini.</span></h1>
-    <p class="lead offerta-hero"><b class="nome-offerta">Solo domenica a pranzo</b>Battuta di manzo ai funghi porcini – tagliolini freschi ai funghi porcini – scaloppina di maiale ai funghi porcini – bunet della tradizione</p>
-    <p class="prezzo-hero"><span class="pre">A soli</span><s>45€</s>30€</p>
-    <p class="scarsita">Pochi tavoli disponibili</p>
+    <span class="badge"><span class="dot"></span>Domenica a pranzo · fino al 30/11</span>
+    <h1 class="titolo-elegante">Assapora la carnosità <span class="l2">dei funghi porcini</span></h1>
+    <p class="descr-hero">con un menù completo dall'antipasto al dolce</p>
+    <p class="prezzo-persona"><s>45€</s> <span class="prezzo">30€</span> <span class="unita">a persona</span></p>
     <div class="cta-row">
       <a class="btn" href="#book">Prenota un tavolo</a>
-      <div class="rate"><span class="stars">★★★★★</span><br><b>4.9</b> · 500+ carnivori soddisfatti</div>
     </div>
+    <p class="scarsita-hero">Pochi tavoli rimasti</p>
   </div>
 </header>
+
+<!-- IL MENÙ -->
+<section class="section">
+  <div class="wrap">
+    <div class="carta">
+      <p class="occhiello">Domenica a pranzo · fino al 30/11</p>
+      <h2 class="display">Il <span class="l2">menù</span></h2>
+      <div class="fregio" aria-hidden="true">✦</div>
+      <ul class="portate">
+        <li class="portata"><small>Antipasto</small><span>Flan con porcini</span></li>
+        <li class="portata"><small>Primo</small><span>Calamarata porcini e crema di porri</span></li>
+        <li class="portata"><small>Secondo</small><span>Polenta porcini e salsiccia</span></li>
+        <li class="portata"><small>Dolce</small><span>Bunet</span></li>
+      </ul>
+      <div class="offerta-carta">
+        <p class="etichetta">Menù completo</p>
+        <p class="prezzo-carta"><s>45€</s>30€</p>
+        <p class="persona">a persona</p>
+        <a class="btn" href="#book">Prenota un tavolo</a>
+        <p class="scarsita-carta">Pochi tavoli rimasti</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- PRENOTAZIONE -->
 <section class="section book-sec">
@@ -345,37 +431,12 @@ src="https://www.facebook.com/tr?id=1752658912398511&ev=PageView&noscript=1"
   </div>
 </section>
 
-<!-- OFFERTA -->
-<section class="section">
-  <div class="wrap">
-    <h2 class="display offerta-titolo">Offerta</h2>
-    <div class="offer">
-      <div class="offer-testo">
-        <span class="badge"><span class="dot"></span>Pochi tavoli disponibili</span>
-        <h2 class="display offer-title">
-          Menù <span class="l2">ai porcini</span>
-        </h2>
-        <p class="sfida display">Domenica a pranzo,<br><span class="l2">solo a ottobre.</span></p>
-        <p class="desc">Battuta di manzo ai funghi porcini – tagliolini freschi ai funghi porcini – scaloppina di maiale ai funghi porcini – bunet della tradizione</p>
-        <div class="price"><span class="pre">A soli</span><s>45€</s>30€</div>
-        <p class="valida">Pochi tavoli disponibili</p>
-        <a class="btn" href="#book">Prenota un tavolo</a>
-        <div class="fine">Pochi tavoli disponibili — di solito sold out</div>
-      </div>
-      <figure class="offer-foto">
-        <img src="offerta-porcini.jpg" alt="Cassette di funghi porcini freschi" loading="lazy">
-      </figure>
-    </div>
-  </div>
-</section>
-
-
 <!-- ESPERIENZA -->
 <section class="section exp">
   <div class="wrap">
     <span class="kicker">L'esperienza</span>
     <h2 class="display">La domenica a pranzo<br><span class="l2">in famiglia</span></h2>
-    <p class="intro">Abbiamo avuto tra le mani <b>i migliori porcini della zona</b>, e abbiamo pensato di prepararvi un menù dedicato dall'antipasto al dolce.<br>Solo per ottobre potete gustare questa prelibatezza che la natura ci offre <b>una volta all'anno</b>.</p>
+    <p class="intro">Abbiamo avuto tra le mani <b>i migliori porcini della zona</b>, e abbiamo pensato di prepararvi un menù dedicato dall'antipasto al dolce.<br>Fino a fine novembre potete gustare questa prelibatezza che la natura ci offre <b>una volta all'anno</b>.</p>
 
     <div class="banco">
       <figure class="tile">
@@ -452,6 +513,61 @@ src="https://www.facebook.com/tr?id=1752658912398511&ev=PageView&noscript=1"
 </footer>
 
 <script>
+/* Video dell'hero "padella porcini" (1080x1350, ricavato da "PADELLA PORCINI.mp4"
+   rallentato al 60% con fotogrammi intermedi sfumati, loop continuo di 18,5 s in
+   cui la fine sfuma nell'inizio, 0,9 Mbit/s, 2 MB).
+   - Lo scarico TUTTO prima di farlo partire: con 4G debole, in streaming si ferma
+     ad aspettare dati e iPhone in quelle pause lo disegna piccolo e spostato.
+   - Sopra il video c'è il suo primo fotogramma come immagine: sparisce quando il
+     video gira davvero e torna se si ferma o ricomincia il giro.
+   - Con Risparmio energetico/dati il telefono blocca l'autoplay: parte al primo
+     tocco o scorrimento.
+   Se cambi il video, cambia anche il nome del file (cache lunga sulla VPS). */
+(function () {
+  var v = document.querySelector(".hero-video");
+  if (!v) return;
+  var url = "hero-porcini-padella-lento.mp4";
+  var hero = document.querySelector(".hero");
+  v.muted = true; v.defaultMuted = true; v.setAttribute("muted", "");
+  v.playsInline = true; v.setAttribute("playsinline", ""); v.setAttribute("webkit-playsinline", "");
+  hero.classList.add("con-video");
+
+  function avvia(){ var p = v.play(); if (p && p.catch) p.catch(function(){}); }
+  function mostra(){ hero.classList.add("video-in-onda"); }
+  function nascondi(){ hero.classList.remove("video-in-onda"); }
+  v.addEventListener("playing", mostra);
+  v.addEventListener("waiting", nascondi);
+  v.addEventListener("stalled", function(){ if (v.readyState < 3) nascondi(); });
+  v.addEventListener("pause", nascondi);
+  v.addEventListener("seeking", nascondi);
+  v.addEventListener("seeked", function(){ if (!v.paused) mostra(); });
+  v.addEventListener("timeupdate", function(){
+    if (!v.paused && v.readyState >= 3 && !hero.classList.contains("video-in-onda")) mostra();
+  });
+
+  function carica(sorgente){
+    v.preload = "auto";
+    v.src = sorgente;
+    v.load(); avvia();
+    v.addEventListener("canplay", function(){ if (v.paused) avvia(); });
+  }
+  if (window.fetch && window.URL && URL.createObjectURL) {
+    fetch(url).then(function(r){ if (!r.ok) throw 0; return r.blob(); })
+      .then(function(b){ carica(URL.createObjectURL(b)); })
+      .catch(function(){ carica(url); });
+  } else { carica(url); }
+
+  function alPrimoGesto(){ if (v.src && v.paused) avvia(); }
+  ["touchstart", "touchend", "click", "scroll"].forEach(function(ev){
+    window.addEventListener(ev, alPrimoGesto, { passive: true });
+  });
+  v.addEventListener("playing", function(){
+    ["touchstart", "touchend", "click", "scroll"].forEach(function(ev){
+      window.removeEventListener(ev, alPrimoGesto);
+    });
+  });
+})();
+
 /* Barra in alto: trasparente sull'hero, scura appena si scorre */
 (function () {
   var nav = document.querySelector(".nav");
