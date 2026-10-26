@@ -86,6 +86,9 @@ video.hero-video,.hero.con-video .hero-foto{filter:none;-webkit-mask-image:none;
   linear-gradient(180deg,rgba(10,9,8,.68) 0%,rgba(10,9,8,.5) 30%,rgba(10,9,8,.56) 70%,rgba(10,9,8,.9) 90%,#0a0908 100%)}
 .hero-inner{position:relative;z-index:2;max-width:1120px}
 .hero .badge{margin-bottom:18px;background:rgba(10,9,8,.7)}
+/* pillola dell'hero più piccola e discreta */
+.hero .badge{padding:5px 12px;gap:6px;font-size:10px;letter-spacing:.1em}
+.hero .badge .dot{width:5px;height:5px}
 .hero h1{font-size:clamp(64px,13vw,196px);text-shadow:0 4px 34px rgba(0,0,0,.65)}
 .hero h1 .l2{color:var(--red)}
 /* Hero essenziale sul modello della landing Polletto Day: titolo su due righe,
@@ -156,7 +159,13 @@ video.hero-video,.hero.con-video .hero-foto{filter:none;-webkit-mask-image:none;
     mask-image:linear-gradient(180deg,#000 68%,transparent 100%)}
   /* col video: niente foto accorciata, il video copre tutto l'hero */
   .hero.con-video{min-height:calc(100svh - 70px)}
-  .hero.con-video .hero-bg{height:100%}
+  /* video meno zoomato: invece di coprire tutto l'hero (che su telefono è molto più
+     alto del video 4:5 e lo ingrandiva di oltre una volta e mezza) occupa la parte
+     alta con le sue proporzioni, intero in larghezza. Sotto sfuma nel nero della
+     pagina con la velatura .hero::after (sul video niente mask-image, vedi sopra). */
+  .hero.con-video .hero-bg{height:auto;bottom:auto;aspect-ratio:1080/1350}
+  .hero.con-video::after{content:"";position:absolute;left:0;right:0;z-index:1;pointer-events:none;
+    top:calc(100vw * 1.25 - 200px);height:200px;background:linear-gradient(180deg,rgba(10,9,8,0),#0a0908)}
   .hero .lead{font-size:17px}
   .hero .cta-row{flex-direction:column;gap:18px}
   /* bottone più compatto su telefono: largo quanto il testo, non tutta la riga */
@@ -349,9 +358,9 @@ src="https://www.facebook.com/tr?id=1752658912398511&ev=PageView&noscript=1"
   <!-- primo fotogramma come immagine SOPRA il video: lo copre finché non gira davvero -->
   <img class="hero-bg hero-foto" src="hero-porcini-padella-lento.jpg" alt="Funghi porcini saltati in padella" onerror="this.style.display='none'">
   <div class="wrap hero-inner">
-    <span class="badge"><span class="dot"></span>Domenica a pranzo · fino al 30/11</span>
+    <span class="badge"><span class="dot"></span>Per veri amanti dei funghi porcini</span>
     <h1 class="titolo-elegante">Assapora la carnosità <span class="l2">dei funghi porcini</span></h1>
-    <p class="descr-hero">con un menù completo dall'antipasto al dolce</p>
+    <p class="descr-hero">Menù intero dall'antipasto al dolce</p>
     <p class="prezzo-persona"><s>45€</s> <span class="prezzo">30€</span> <span class="unita">a persona</span></p>
     <div class="cta-row">
       <a class="btn" href="#book">Prenota un tavolo</a>
