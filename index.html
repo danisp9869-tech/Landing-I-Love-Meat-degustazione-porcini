@@ -356,7 +356,10 @@ src="https://www.facebook.com/tr?id=1752658912398511&ev=PageView&noscript=1"
   <!-- video di sfondo: la sorgente la mette lo script in fondo (scarica il file intero prima di partire) -->
   <video class="hero-bg hero-video" muted playsinline webkit-playsinline loop autoplay preload="none" disablepictureinpicture aria-hidden="true"></video>
   <!-- primo fotogramma come immagine SOPRA il video: lo copre finché non gira davvero -->
-  <img class="hero-bg hero-foto" src="hero-porcini-padella-lento.jpg" alt="Funghi porcini saltati in padella" onerror="this.style.display='none'">
+  <picture>
+    <source media="(max-width:600px)" srcset="hero-porcini-padella-lento.jpg">
+    <img class="hero-bg hero-foto" src="hero-porcini-padella-lento-desktop.jpg" alt="Funghi porcini saltati in padella" onerror="this.style.display='none'">
+  </picture>
   <div class="wrap hero-inner">
     <span class="badge"><span class="dot"></span>Per veri amanti dei funghi porcini</span>
     <h1 class="titolo-elegante">Assapora la carnosità <span class="l2">dei funghi porcini</span></h1>
@@ -524,7 +527,9 @@ src="https://www.facebook.com/tr?id=1752658912398511&ev=PageView&noscript=1"
 <script>
 /* Video dell'hero "padella porcini" (1080x1350, ricavato da "PADELLA PORCINI.mp4"
    rallentato al 60% con fotogrammi intermedi sfumati, loop continuo di 18,5 s in
-   cui la fine sfuma nell'inizio, 0,9 Mbit/s, 2 MB).
+   cui la fine sfuma nell'inizio, 0,9 Mbit/s, 2 MB) su telefono. Su desktop la
+   versione orizzontale (1920x1280) dello stesso filmato, lavorata allo stesso
+   modo: 18,5 s, 2 Mbit/s, 4,5 MB.
    - Lo scarico TUTTO prima di farlo partire: con 4G debole, in streaming si ferma
      ad aspettare dati e iPhone in quelle pause lo disegna piccolo e spostato.
    - Sopra il video c'è il suo primo fotogramma come immagine: sparisce quando il
@@ -535,7 +540,9 @@ src="https://www.facebook.com/tr?id=1752658912398511&ev=PageView&noscript=1"
 (function () {
   var v = document.querySelector(".hero-video");
   if (!v) return;
-  var url = "hero-porcini-padella-lento.mp4";
+  // verticale su schermo stretto, orizzontale sugli altri: ognuno scarica solo il suo
+  var mobile = window.matchMedia("(max-width:600px)").matches;
+  var url = mobile ? "hero-porcini-padella-lento.mp4" : "hero-porcini-padella-lento-desktop.mp4";
   var hero = document.querySelector(".hero");
   v.muted = true; v.defaultMuted = true; v.setAttribute("muted", "");
   v.playsInline = true; v.setAttribute("playsinline", ""); v.setAttribute("webkit-playsinline", "");
